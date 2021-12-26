@@ -11,6 +11,7 @@ def home(request):
     testomonials  = Testimonials.objects.filter().order_by('-id')
     properties    = Property.objects.filter(is_exclusive=True).order_by('-id')[:4]
     enquiry_form  = EnquiryForm()
+
     return render(request, 'pages/home.html',
                   {'builder_logos': builder_logos, 'about_us': about_us, 'banner_vedio': banner_vedio,
                    'testomonials': testomonials, 'properties': properties, 'enquiry_form': enquiry_form,
@@ -60,17 +61,17 @@ def enquiry_property(request):
     return render(request, 'pages/home.html', {'enquiry_form': enquiry_form, 'title': 'Enquiry-Form'})
 
 
-def property_list_builder(request):
-    if request.path  == '/builders/private/':
+def property_list_builder(request,property_type=None):
+    if property_type == 'private':
         property_type = 'private'
         builders = Builder.objects.all()
-        property_list_builder = Property.objects.filter(builder_type__in=list(builders),property_type = property_type)
-        return render(request, 'properties/property_by_builder.html',{'builders': builders, 'property': property_list_builder, 'title': 'Builder Listed Properties'})
-    elif request.path  == '/builders/commercial/':
+        private_properties = Property.objects.filter(builder_type__in=list(builders),property_type = property_type)
+        return render(request, 'properties/property_by_builder.html',{'builders': builders, 'private_property': private_properties, 'title': 'Builder Listed Properties'})
+    elif property_type== 'commercial':
         property_type = 'commercial'
         builders = Builder.objects.all()
-        property_list_builder = Property.objects.filter(builder_type__in=list(builders), property_type=property_type)
-        return render(request, 'properties/property_by_builder.html',{'builders': builders, 'property': property_list_builder, 'title': 'Builder Listed Properties'})
+        commercial_properties = Property.objects.filter(builder_type__in=list(builders), property_type=property_type)
+        return render(request, 'properties/property_by_builder.html',{'builders': builders, 'commercial_property': commercial_properties, 'title': 'Builder Listed Properties'})
     else:
         builders = Builder.objects.all()
         property_list_builder = Property.objects.filter(builder_type__in=list(builders))
