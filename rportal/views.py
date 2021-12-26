@@ -100,8 +100,7 @@ def news_letter(request):
 
 def builder_listed_properties(request, builder_name):
     property_list_builder = Property.objects.filter(builder_type__builder_slug=builder_name)
-    return render(request, 'properties/all_property_by_builder.html',
-                  {'property': property_list_builder, 'title': 'Builder All Listed Properties'})
+    return render(request, 'properties/all_property_by_builder.html',{'property': property_list_builder, 'title': 'Builder All Listed Properties'})
 
 
 def property_details(request, builder_name, property_name):
