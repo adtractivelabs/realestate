@@ -60,7 +60,7 @@ def enquiry_property(request):
     return render(request, 'pages/home.html', {'enquiry_form': enquiry_form, 'title': 'Enquiry-Form'})
 
 
-def property_list_builder(request,prperty_tye=None):
+def property_list_builder(request):
     if request.path  == '/builders/private/':
         property_type = 'private'
         builders = Builder.objects.all()

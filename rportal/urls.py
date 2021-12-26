@@ -1,5 +1,5 @@
 from .views import  *
-from django.urls import path
+from django.urls import path,re_path
 
 app_name = 'rportal'
 
@@ -7,7 +7,6 @@ urlpatterns = [
     path('',home,name='home'),
     path('about-us/',about_us,name='about_us'),
     path('contact-us/',contact_us,name='contact_us'),
-
     path('builders/',property_list_builder,name='property_list_builder'),
 
     path('builders/<str:builder_name>/',builder_listed_properties,name='builder_listed_properties'),
