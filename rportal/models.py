@@ -210,6 +210,9 @@ class AboutUs(models.Model):
     created_at          = models.DateTimeField(auto_now_add=True)
     updated_at          = models.DateTimeField(auto_now=True)
 
+    contact_page_text   = models.TextField()
+    home_page_text      = models.TextField()
+
     def __str__(self):
         return self.site_description
 
