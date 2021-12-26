@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+    <section>
+        <div class="banner-section aboutus" data-aos="zoom-out">
+            <h1 class="prop-heading">About Us</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="about-us">
+            <div class="container-fluid">
+                <div class="watch-icon" data-aos="flip-right" >
+                    <img src="{% static 'images/watch-icon.png' %}">
+                </div>
+                <div class="aout-left">
+                    <img src="{% if about_list.0.about_logo %}{{ about_list.0.about_logo.url }}{% endif %}">
+                </div>
+                <div class="aount-right p-5">
+                    <p>{{ about_list.0.about_description }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="about-tab-sec">
+            <div class="container-fluid">
+                <div class="about-tab-sec-main">
+                    <div class="vision-cion" data-aos="flip-left">
+                        <img src="{% static 'images/vision-icon.png' %}">
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="javascript:;" data-id="Vision" class="active">Vision</a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;" data-id="Mission">Mission</a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;" data-id="Philosophy">Philosophy</a>
+                        </li>
+                    </ul>
+
+                    <div class="about-tab-content active p-4" id="Vision" data-aos="fade-up">
+                        <p>{{ about_list.0.about_vision }}</p>
+                    </div>
+
+                    <div class="about-tab-content p-4" id="Mission" data-aos="fade-up" >
+                        <p>{{ about_list.0.about_mission }}</p>
+                    </div>
+
+
+                    <div class="about-tab-content p-4" id="Philosophy" data-aos="fade-up">
+                        <p>{{ about_list.0.about_philosophy }}</p>
+                    </div>
+
+                    <div class="knowmore-btn">
+                        <span class="d-arrw"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="about-video" data-aos="fade-up">
+            <div class="about-video-sec">
+                <img src="{% static 'images/about-video-iocn.jpg' %}">
+                <div class="video-icon">
+                    <a href="{{ about_list.0.about_video_link }}" class="fresco"><img src="{% static 'images/play-iocn.png' %}"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

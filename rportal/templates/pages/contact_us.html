@@ -1,0 +1,111 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+    <section>
+        <div class="banner-section contactus" data-aos="zoom-out">
+            <h1 class="prop-heading">CONTACT US</h1>
+        </div>
+    </section>
+    <section>
+        <div class="about-us">
+            <div class="container-fluid">
+                <div class="aout-left" data-aos="zoom-out" >
+                    <img src="{% if about_us.0.about_logo %}{{ about_us.0.about_logo.url }}{% endif %}">
+                </div>
+                <div class="aount-right contact-us">
+                    <p>{{ about_us.0.site_description }}</p>
+                    <div class="contact-details">
+                        <div class="phone-no">{{ about_us.0.about_phone_no }}</div>
+                        <div class="email-id"><a href="mailto:{{ about_us.0.about_email }}">{{ about_us.0.about_email }}</a></div>
+                        <div class="get-direction">Get Directions<img src="{% static 'images/get-direction.png' %}"></div>
+                        <div class="telephone-iocn"><img src="{% static 'images/telephone-iocn.png' %}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="contact-us-main" data-aos="zoom-out">
+            <div class="cont-b-icon">
+                <img src="{% static 'images/contact-b-icon.png' %}">
+            </div>
+            <div class="contact-form">
+                <div class="contact-form-main">
+                    <div class="inqury-section">
+                        <div class="inqury-heading">Get In Touch</div>
+                        <div class="p-5">
+                            <br>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} w-100">
+                                        {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="container-fluid w90">
+                            <form action="{% url 'rportal:contact_us' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-contorl" data-aos="zoom-out">
+                                            <div class="input-field">
+                                                <label>Name*</label>
+                                                {{ contact_form.name }}
+                                                <span class="error">{{ contact_form.name.errors }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-contorl" data-aos="zoom-out">
+                                            <div class="input-field">
+                                                <label>Email*</label>
+                                                {{ contact_form.email }}
+                                                <span class="error">{{ contact_form.email.errors }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-contorl" data-aos="zoom-out">
+                                            <div class="input-field">
+                                                <label>Phone*</label>
+                                                {{ contact_form.phone }}
+                                                <span class="error">{{ contact_form.phone.errors }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-contorl" data-aos="zoom-out">
+                                            <div class="input-field">
+                                                <label>Purpose*</label>
+                                                {{ contact_form.purpose }}
+                                                <span class="error">{{ contact_form.purpose.errors }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-contorl" data-aos="zoom-out">
+                                            <div class="input-field">
+                                                <label>Message*</label>
+                                                {{ contact_form.message }}
+                                                <span class="error">{{ contact_form.message.errors }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="get-notified contact-sbt">
+                                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

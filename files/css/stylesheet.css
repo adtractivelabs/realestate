@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'AmeriGarmnd BT';
+    src: url('fonts/AmericanGaramondBT-Roman.woff2') format('woff2'),
+        url('fonts/AmericanGaramondBT-Roman.woff') format('woff'),
+        url('fonts/AmericanGaramondBT-Roman.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Artifakt Element';
+    src: url('fonts/ArtifaktElement-Regular.woff2') format('woff2'),
+        url('fonts/ArtifaktElement-Regular.woff') format('woff'),
+        url('fonts/ArtifaktElement-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

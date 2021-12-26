@@ -1,0 +1,24 @@
+{% load static %}
+<div class="container-fluid">
+    <div class="navigation" data-aos="fade-up">
+        <div class="nav-left">
+            <div class="logo"><img src="{% static 'images/logo.png' %}" alt="logo"></div>
+        </div>
+        <div class="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="overlay"></div>
+        <div class="nav-right">
+            <span class="close-menu">X</span>
+            <ul>
+                <li><a href="{% url 'rportal:home' %}">Home</a></li>
+                <li><a href="{% url 'rportal:about_us' %}">About</a></li>
+                <li><a href="{% url 'rportal:property_list_builder'  %}">Residential Properties</a></li>
+                <li><a href="{% url 'rportal:property_list_builder' %}">Commercial Properties</a></li>
+                <li><a href="{% url 'rportal:contact_us' %}">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

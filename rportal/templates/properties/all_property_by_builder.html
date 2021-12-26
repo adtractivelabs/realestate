@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+    <section>
+        <div class="excwrapper properties">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="exclusive-collect">
+                        <div class="exculsive-heading">{{ property.0.builder_type.builder_name }}</div>
+                        <div class="exc-collec-main">
+                            {% for property in property %}
+                                <div class="exc-content" data-aos="zoom-out">
+                                    <img src="{% if property.property_image %}{{ property.property_image.url }}{% endif %}">
+                                    <div class="exc-detail">
+                                        <div class="exc-h-name">{{ property.property_name }}<span>{{ property.property_location.location_name }}</span></div>
+                                        <div class="exc-price">{{ property.property_price }}<span class="text-capitalize">{{ property.property_type }}</span></div>
+                                        <div class="view-btn p-0"><a href="{% url 'rportal:property_details' property.builder_type.builder_slug property.property_slug %}">View Details</a></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center my-5">
+            <a class="btn btn-outline-dark mx-4 p-4 btn-group-lg" href="{% url 'rportal:enquire_now' %}">Enquire Now Here !! </a>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+         {% block head %}
+              {% include 'base/head.html' %}
+              {% block style %}{% endblock %}
+         {% endblock %}
+	 <body>
+        <!--================Header Content Area =================-->
+               <header class="project-menu">
+                    {% include 'base/header.html' %}
+               </header>
+        <!--================Header End Content Area =================-->
+
+        <!--================Start Content Area =================-->
+
+               {% block content %}
+
+               {% endblock %}
+
+         <!--================Start Content Area =================-->
+
+		 <!--================Start Footer Area =================-->
+
+            {% include 'base/footer.html' %}
+
+         <!--================Footer End Area ==============-->
+
+         <!--================Start Js Area =================-->
+
+           {% include 'base/scripts.html' %}
+
+                {% block scripts %}
+
+                {% endblock %}
+
+          <!--================Js End Area =================-->
+    </body>
+
+</html>

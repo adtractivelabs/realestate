@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <section>
+        <div class="blog-wrappper blog-section">
+            <div class="container">
+                <div class="blog-heading" data-aos="zoom-out">BLOGS</div>
+                <div class="news-wrap">
+                    <div class="row">
+                        {% for blog in blog %}
+                            <div class="col-lg-4 col-md-12 col-xs-12 a8">
+                                <div class="news-item a27"  data-aos="zoom-out">
+                                    <a href="javascript:;" class="news-img-link">
+                                        <div class="news-item-img">
+                                            <img class="img-responsive a17 rounded" src="{% if blog.blog_image %}{{ blog.blog_image.url }}{% endif %}" alt="New Commercial Projects in Gurgaon">
+                                        </div>
+                                    </a>
+                                    <div class="news-item-text">
+                                        <a href="{% url 'rblog:blog_details_view' blog.blog_slug %}"><h5 style="text-align: left; line-height: inherit;">{{ blog.blog_title }}</h5></a>
+                                        <div class="dates">
+                                            <span class="date">{{ blog.created_date }}</span>
+                                        </div>
+                                        <br>
+                                        <div class="news-item-bottom">
+                                            <div class="admin">
+                                                <p> By, {{ blog.blog_author.name }}</p>
+                                            </div>
+                                            <a href="{% url 'rblog:blog_details_view' blog.blog_slug %}" class="news-link">Read more...</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="load-more-btn"><a href="javascript:;">Load More</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

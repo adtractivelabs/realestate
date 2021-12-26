@@ -1,0 +1,179 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+    <section>
+        <div class="banner-section project-banner" data-aos="zoom-out">
+            <h1 class="prop-heading">Projects</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="project-wrapper">
+            <div class="container-fluid">
+                <div class="project-f-heading" data-aos="zoom-out">{{ property_details.0.property_price }}<span>Onwards</span></div>
+                <div class="project-s-heading" data-aos="zoom-out">{{ property_details.0.property_name }}<span>{{ property_details.0.property_location.location_name }}</span></div>
+                <div class="project-content" data-aos="zoom-out">
+                    <p>{{ property_details.0.property_description|safe }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="procet-overview">
+            <div class="container-fluid">
+                <div class="overview-tab">
+                    <ul id="scrollpickerr" data-aos="zoom-out">
+                        <li class="active"><a href="javascript:;" class="active" data-tab="Overview" >Overview</a></li>
+                        <li><a href="javascript:;" data-tab="floor-plans">Floor Plans</a></li>
+                        <li><a href="javascript:;" data-tab="Area-pricing">Area & Pricing</a></li>
+                        <li><a href="javascript:;" data-tab="Amenities"> Amenities </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="overview-content">
+                <div class="overvie-sub active" id="Overview">
+                    <div class="overview-left">
+                        <img src="{% if property_details.0.property_image %}{{ property_details.0.property_image.url }}{% endif %}" style="height:571px;">
+                    </div>
+                    <div class="overview-right">
+                        <div class="overview-head">Overview</div>
+                        <div class="overview-range">
+                            <div class="overview-sub-t">Area Range</div>
+                            <div class="overview-l">{{ property_details.0.property_area_sq_ft }}</div>
+                        </div>
+
+                        <div class="overview-range">
+                            <div class="overview-sub-t">Base Price</div>
+                            <div class="overview-l">{{ property_details.0.property_price }}</div>
+                        </div>
+
+                        <div class="overview-range">
+                            <div class="overview-sub-t">Current Status</div>
+                            <div class="overview-l">{{ property_details.0.property_construction }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overvie-sub" id="floor-plans">
+                    <div class="overview-left">
+                        <img src="{% if property_details.0.property_image %}{{ property_details.0.property_image.url }}{% endif %}" style="height: 571px;">
+                    </div>
+                    <div class="overview-right">
+                        <div class="overview-head">Floor Plans</div>
+                        <div class="overview-range">
+                            <div class="overview-sub-t">Area Range</div>
+                            <div class="overview-l">{{ property_details.0.property_area_sq_ft }}</div>
+                        </div>
+
+                        <div class="overview-range">
+                            <div class="overview-sub-t">Number of floor</div>
+                            <div class="overview-l">{{ property_details.0.property_floor }}</div>
+                        </div>
+
+                        <div class="overview-range">
+                            <div class="overview-sub-t">Base Price</div>
+                            <div class="overview-l">{{ property_details.0.property_price }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overvie-sub" id="Area-pricing">
+                    <div class="overview-left">
+                        <img src="{% if property_details.0.property_image %}{{ property_details.0.property_image.url }}{% endif %}" style="height: 571px;"></div>
+                    <div class="overview-right">
+                        <div class="overview-head">Area & Pricing </div>
+                        <div class="overview-range">
+                            <div class="overview-sub-t">Area Range</div>
+                            <div class="overview-l">{{ property_details.0.property_area_sq_ft }}</div>
+                        </div>
+
+                        <div class="overview-range">
+                            <div class="overview-sub-t">Base Price</div>
+                            <div class="overview-l">{{ property_details.0.property_price }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overvie-sub" id="Amenities">
+                    <div class="overview-left">
+                        <img src="{% if property_details.0.property_image %}{{ property_details.0.property_image.url }}{% endif %}" style="height: 571px;">
+                    </div>
+                    <div class="overview-right">
+                        <div class="overview-head">Ameneties</div>
+                        <div class="overview-range">
+                            <div class="overview-sub-t">Ameneties</div>
+                            {% for a in property_details.0.property_amenities.all %}
+                                <div class="overview-l">{{ a.amenities_name }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="excwrapper properties">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="exclusive-collect">
+                        <div class="exculsive-heading" data-aos="zoom-out">Approved by Banks</div>
+                        <div class="bank-deatil" data-aos="zoom-out">
+                            <ul>
+                                <li><a href="javascript:;"><img src="{% static 'images/hdfc-logo.jpg' %}"></a></li>
+                                <li><a href="javascript:;"><img src="{% static 'images/bank-baroda.jpg' %}"></a></li>
+                                <li><a href="javascript:;"><img src="{% static 'images/allhabad-logo.jpg' %}"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="excwrapper properties">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="exclusive-collect">
+                        <div class="exculsive-heading" data-aos="zoom-out">Related Project</div>
+                        <div class="exc-collec-main">
+                            {% for build in property_list %}
+                                {% for pro in build.builder_properties.all|slice:2 %}
+                                    <div class="{% if pro.id|divisibleby:2 %} exc-content right-align {% else %} exc-content {% endif %}" data-aos="zoom-out">
+                                        <img src="{% if pro.property_image %}{{ pro.property_image.url }}{% endif %}">
+                                        <div class="exc-detail">
+                                            <div class="exc-h-name">{{ pro.property_name }}<span>{{ pro.property_location.location_name }}</span></div>
+                                            <div class="exc-price">{{ prop.property_price }}<span class="text-capitalize">{{ pro.property_type }}</span></div>
+                                            <div class="view-btn"><a href="{% url 'rportal:property_details' build.builder_slug pro.property_slug %}">View Details</a></div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   <section>
+        <div class="subscribe-main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-contorl" data-aos="zoom-out">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} w-25">
+                                    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form class="form-contorl row p-2" action="{% url 'rportal:news_letter' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="input-subs">
+                                <input type="text" name="email" placeholder="Enter Your Email Adress" required>
+                                <button type="submit" style="width: 233px;margin:11px;padding:9px;color:black;background-color:lightgrey;" value="Submit">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

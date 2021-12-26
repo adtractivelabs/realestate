@@ -1,0 +1,157 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+    <section>
+	<div class="banner-section" data-aos="fade-up">
+	     <video autoplay="" muted="" loop="">
+                 <source src="http://65.1.151.181{{ banner_vedio.0.video_file.url }}" type="video/mp4">
+            </video>
+        </div>
+    </section>
+    <section>
+        {% if about_us %}
+            <div class="about-secation" data-aos="fade-up">
+                <div class="about-left">
+                    <div class="about-us-heading">About Us</div>
+                    <div class="about-content">
+                        <p>{{ about_us.0.site_description }}</p>
+                    </div>
+                    <div class="knowmore-btn">
+                        <a href="{% url 'rportal:about_us' %}">More</a>
+                        <span class="d-arrw"></span>
+                    </div>
+                </div>
+                <div class="about-right">
+                    <div class="about-image">
+                       <img src="{% static 'images/about-image.jpg' %}" alt="about-image">
+		    </div>
+                </div>
+            </div>
+            </section>
+        {% endif %}
+    <section>
+        <div class="exclusive-collection">
+            <div class="exc-key" data-aos="zoom-out"><img src="{% static 'images/key-img.png' %}" alt="key-img"></div>
+            <div class="excl-heading" data-aos="zoom-out" >Exclusive Collection</div>
+            {% for exclusive in properties %}
+                <div class="exc-box" data-aos="fade-up">
+                    <div class="exc-left">
+                        <img src="{% if exclusive.property_image %}{{ exclusive.property_image.url }}{% endif %}">
+                    </div>
+                    <div class="exc-right">
+                        <div class="exc-r-head" onclick="location.href='{% url 'rportal:property_details' exclusive.builder_type.builder_slug exclusive.property_slug %}';">{{ exclusive.property_name }}</div>
+                        <div class="exc-r-sect">{{ exclusive.property_location.location_area }}</div>
+                        {#<div class="exc-r-city">{{ exclusive.property_location.location_name }}</div>#}
+                        <div class="exc-r-price">{{ exclusive.property_price }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section>
+        <div class="about-secation" data-aos="fade-up">
+            <div class="about-right">
+                <div class="about-image">
+                    <img src="{% static 'images/properties-bg.jpg' %}" alt="about-image">
+                </div>
+            </div>
+            <div class="about-left propt">
+                <div class="about-us-heading">Properties</div>
+                <div class="about-content">
+                    <p>20000 + Sold sold</p>
+                    <p>80000 + Rented</p>
+                    <p>15000 + Leased</p>
+                </div>
+                <div class="knowmore-btn">
+                    <a href="javascript:;">Explore More</a>
+                    <span class="d-arrw"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="our-client" data-aos="fade-up">
+            <div class="client-head">Our Clients</div>
+            <div class="testmonial-slide">
+                {% if testomonials %}
+                    {% for testo in testomonials %}
+                        <div class="test-slide-main">
+                            <div class="test-head">Testomonials</div>
+                            <br>
+                            <div class="text-img"><img class="rounded-circle h-10 w-10" src="{% if testo.testo_client_image %}{{ testo.testo_client_image.url }}{% endif %}"></div>
+                            <div class="test-content">{{ testo.testo_desc }}</div>
+                            <div class="client-name">{{ testo.testo_name }}</div>
+                            <div class="test-city">{{ testo.testo_locations.location_name }}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="logo-slider" data-aos="fade-up">
+            <div class="slider-main">
+                <div class="slick-banner">
+                    {% for build in builder_logos %}
+                        <div class="logoslide">
+                            <img src="{% if build.builder_logo %}{{ build.builder_logo.url }}{% endif %}" style="width: 120px;height: 110px">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="my-5">
+        <div class="inqury-section" data-aos="fade-up">
+            <div class="inqury-heading">Your</div>
+            <div class="sub-heading">Inquiry</div>
+            <div class="container-fluid w90">
+                <div class="row">
+                    <form class="form-contorl row" action="{% url 'rportal:enquiry_property' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-contorl" data-aos="fade-up">
+                                <div class="input-field">
+                                    <label>Name*</label>
+                                    {{ enquiry_form.name }}
+                                </div>
+                                 <span class="text-danger text-center">
+                                        {{ enquiry_form.name.errors }}
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-contorl" data-aos="fade-up">
+                                <div class="input-field">
+                                    <label>Phone*</label>
+                                    {{ enquiry_form.phone }}
+                                </div>
+                                <span class="text-danger text-center">
+                                    {{ enquiry_form.phone.errors }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-contorl" data-aos="fade-up">
+                                <div class="input-field">
+                                    <label>Email*</label>
+                                    {{ enquiry_form.email }}
+                                </div>
+                                <span class="text-danger text-center">
+                                        {{ enquiry_form.email.errors }}
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="disc-btn">
+                            <button type="submit" class="btn-outline-info p-2 w-100">Enquire Now</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="disc-btn" data-aos="fade-up">
+                    <a href="{% url 'rportal:property_list_builder' %}">Discover Properties <span class="disc-icon"><img src="{% static 'images/disc-icon.png' %}"></span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

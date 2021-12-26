@@ -1,0 +1,255 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block style %}
+    <style>
+        .support-sec {
+            margin-top: 4%;
+            width: 100%;
+            float: left;
+            background: #000000;
+            padding: 33px 20px;
+            margin-bottom: 90px;
+        }
+
+        .get-notified a {
+            width: 100%;
+            margin: 0 auto;
+            text-decoration: none;
+            font-size: 1.5em;
+            color: #000;
+            font-family: 'AmeriGarmnd BT';
+            text-align: center;
+            display: block;
+        }
+
+        .banner-section {
+            width: 100%;
+            float: left;
+            background: url({% static 'images/banner.jpg' %}) no-repeat;
+            height: 157vh;
+            overflow: hidden;
+        }
+
+        .banner-form {
+            width: 500px;
+            float: left;
+            max-height: 701px;
+            height: 1016px;
+            position: absolute;
+            right: 5%;
+            top: 10%;
+            background: rgba(48, 48, 46, 0.8);
+        }
+
+    </style>
+{% endblock %}
+{% block content %}
+    <section>
+        <div class="banner-section landinpage" data-aos="zoom-out">
+            <div class="banner-form" data-aos="zoom-out">
+                <div class="form-heading">Apply Now For a Home</div>
+                <form method="POST" id="lead-form" action="{% url 'rportal:enquire_now' %}">
+                    {% csrf_token %}
+                    <input type="hidden" class="csrf_token" value="{{ csrf_token }}">
+                    <div class="form-contorl">
+                        <span class="input-name">Your Name*</span>
+                        <div class="input-box small"><input type="text" name="name" placeholder="Name"></div>
+                        <span class="error">Please enter your name</span>
+                    </div>
+                    <div class="form-contorl">
+                        <span class="input-name">Your Email*</span>
+                        <div class="input-box small"><input type="email" name="email" placeholder="Email"></div>
+                        <span class="error">Please enter your Email</span>
+                    </div>
+                    <div class="form-contorl">
+                        <span class="input-name">Your Phone*</span>
+                        <div class="input-box small"><input type="text" name="phone" placeholder="Phone No"></div>
+                        <span class="error">Please enter your name</span>
+                    </div>
+                    <div class="form-contorl">
+                        <select class="form-contorl" name="location_name" id="location_value"
+                                aria-label="Default select example">
+                            <option value="">Please select the Location</option>
+                            {% for l in location_name %}
+                                <option value="{{ l.id }}"
+                                        id="location_name-{{ l.location_name }}">{{ l.location_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-contorl">
+                        <select class="form-contorl" id="location_project" aria-label="Default select example">
+                            <option value="">Please select the Project</option>
+
+                        </select>
+                    </div>
+                    <div class="form-contorl">
+                        <select class="form-contorl" id="location_property" aria-label="Default select example">
+                            <option value="">Please select the Property</option>
+                        </select>
+                    </div>
+
+                    <div class="form-contorl">
+                        <div class="get-notified">
+                            <button type="submit" class="btn-block">Get Notified</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="support-sec" style="margin-top: 4%;">
+            <div class="support-main" data-aos="zoom-out">
+                <span class="sup-img"><img src="{% static 'images/home-icon.png' %}"></span>
+                <span class="sup-name">Luxury Homes</span>
+            </div>
+
+            <div class="support-main" data-aos="zoom-out">
+                <span class="sup-img"><img src="{% static 'images/hand-icon.png' %}"></span>
+                <span class="sup-name">Perfect Nature</span>
+            </div>
+
+            <div class="support-main" data-aos="zoom-out">
+                <span class="sup-img"><img src="{% static 'images/support-icon.png' %}"></span>
+                <span class="sup-name">Great Support</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <div class="about-secation">
+            <div class="about-right" data-aos="zoom-out">
+                <div class="about-image">
+                    <img src="{% static 'images/properties-bg.jpg' %}" alt="about-image">
+                </div>
+
+            </div>
+
+            <div class="about-left propt" data-aos="zoom-out" >
+                <div class="about-us-heading">Properties</div>
+                <div class="about-content">
+                    <p>20000 + Sold sold</p>
+                    <p>80000 + Rented</p>
+                    <p>15000 + Leased</p>
+                </div>
+                <div class="knowmore-btn">
+                    <a href="javascript:;">Explore More</a>
+                    <span class="d-arrw"></span>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section>
+        <div class="excwrapper" style="background: currentColor;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="exclusive-collect">
+                        <div class="exculsive-heading" data-aos="zoom-out">Exclusive Collection</div>
+                        <div class="exc-collec-main">
+                            {% for p in property_list_builder|slice:2 %}
+                                <div class="{% if p.id|divisibleby:2 %} exc-content right-align {% else %} exc-content {% endif %}">
+                                    <img src="{% if p.property_image %}{{ p.property_image.url }}{% endif %}">
+                                    <div class="exc-detail">
+                                        <div class="exc-h-name">{{ p.property_name }}<span>{{ p.property_location.location_name }}</span>
+                                        </div>
+                                        <div class="exc-price">{{ p.property_price }}<span
+                                                class="text-capitalize">{{ p.property_type }}</span></div>
+                                        <div class="view-btn"><a
+                                                href="{% url 'rportal:property_details' p.builder_type.builder_slug p.property_slug %}">View
+                                            Details</a></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="subscribe-main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-contorl" data-aos="zoom-out">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} w-25">
+                                    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form class="form-contorl row p-2" action="{% url 'rportal:news_letter' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="input-subs">
+                                <input type="text" name="email" placeholder="Enter Your Email Adress" required>
+                                <button type="submit" style="width: 233px;margin: 11px;padding: 9px;color: black;background-color: lightgrey;"
+                                        value="Submit">Subscribe
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $('#location_value').change(function () {            debugger;
+            var location_value_selected = $(this).find("option:selected");
+            var option_selected = location_value_selected.text();
+            var csrftoken = $('.csrf_token').val()
+            $.ajax(
+                {
+                    type: "GET",
+                    url: "{% url 'rportal:load_builder' %}",
+                    headers:
+                        {
+                            'X-CSRFToken': csrftoken
+                        },
+                    data: {
+                        'location_value': option_selected
+                    },
+                    success: function (data) {
+                        let html_data = '<option value="">Please Select the Project</option>';
+                        data.forEach(function (data) {
+                            html_data += `<option value="${data.id}">${data.builder_name}</option>`
+                        });
+                        $("#location_project").html(html_data);
+                    }
+                })
+        })
+
+        $('#location_project').change(function () {
+            debugger;
+            var location_value_project_selected = $(this).find("option:selected");
+            var option_selected = location_value_project_selected.text();
+            var csrftoken = $('.csrf_token').val()
+            $.ajax(
+                {
+                    type: "GET",
+                    url: "{% url 'rportal:load_builder_properties' %}",
+                    headers:
+                        {
+                            'X-CSRFToken': csrftoken
+                        },
+                    data: {
+                        'builder_name': option_selected
+                    },
+                    success: function (data) {
+                        let html_data = '<option value="">Please Select the Properties</option>';
+                        data.forEach(function (data) {
+                            html_data += `<option value="${data.id}">${data.property_name}</option>`
+                        });
+                        $("#location_property").html(html_data);
+                    }
+                })
+        })
+    </script>
+{% endblock %}

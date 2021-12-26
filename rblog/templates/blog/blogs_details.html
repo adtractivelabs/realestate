@@ -1,0 +1,124 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <section>
+        <div class="blog-wrappper blog-section">
+            <div class="container">
+                <div class="news-wrap">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-12 blog-pots">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <section class="similar-property" data-aos="zoom-out">
+                                        <div class="container">
+                                            <div class="sec-title single-post-title">
+                                                <center><br>
+                                                    <h1>{{ blog_details.0.title }}</h1></center>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <div class="blog-pots-image" data-aos="zoom-out">
+                                        <div class="blog-pots-image-inner">
+                                            <div class="blog-pots-image-item">
+                                                <img src="{% if blog_details.0.photo %}{{ blog_details.0.photo }}{% endif %}" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="blog-info" data-aos="zoom-out">
+                                        <h3 class="mb-3 text-center"><b>{{ blog_details.0.title }}</b></h3>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="container homes-content  mb-30" data-aos="zoom-out">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="mb-3" align="justify">{{ blog_details.0.desc|safe }}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-12 car">
+                            <div class="single widget singleblog">
+                                <div class="schedule widget-boxed mt-33">
+                                    <div class="widget-boxed-header">
+                                        <h4>Request Inquiry</h4>
+                                    </div>
+                                    <div class="form">
+                                        <div class="inqury-section">
+                                            <div class="container-fluid w90">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-contorl">
+                                                            <div class="input-field">
+                                                                <label>Name*</label>
+                                                                <input type="text" name="name">
+                                                                <span class="error">Please enter name</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-contorl">
+                                                            <div class="input-field">
+                                                                <label>Email*</label>
+                                                                <input type="Email" name="Email">
+                                                                <span class="error"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-contorl">
+                                                            <div class="input-field">
+                                                                <label>Phone*</label>
+                                                                <input type="text" name="number">
+                                                                <span class="error"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-contorl">
+                                                            <div class="input-field">
+                                                                <label>Purpose*</label>
+                                                                <input type="text" name="name">
+                                                                <span class="error">Please enter purpose*</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-contorl">
+                                                            <div class="input-field">
+                                                                <label>Message*</label>
+                                                                <textarea cols="2" rows="2"></textarea>
+                                                                <span class="error">Please enter purpose*</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="get-notified">
+                                                    <a href="javascript:;">Submit</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% load static %}
+<footer>
+    <div class="container-fluid">
+        <div class="footer-main" data-aos="fade-up">
+            <ul>
+                <li><a href="javascript:;" class="footer-logo"><img src="{% static 'images/logo.png' %}"></a></li>
+                <li><a href="{% url 'rportal:home' %}">Home</a></li>
+                <li><a href="{% url 'rportal:about_us' %}">About</a></li>
+                <li><a href="{% url 'rportal:property_list_builder' %}">Portfolio</a></li>
+                <li><a href="{% url 'rblog:blog_site' %}">Blogs</a></li>
+                <li><a href="{% url 'rportal:contact_us' %}">Contact</a></li>
+            </ul>
+            <div class="social-link">
+                <span class="social-text">Social</span>
+                <ul>
+                    <li><a href="javascript:;"><img src="{% static 'images/instagram-icon.png' %}"></a></li>
+                    <li><a href="javascript:;"><img src="{% static 'images/linkdin-icon.png' %}"></a></li>
+                    <li><a href="javascript:;"><img src="{% static 'images/facebook-icon.png' %}"></a></li>
+                    <li><a href="javascript:;"><img src="{% static 'images/whats-icon.png' %}"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © 2021 kbuyer's club. All rights reserved</p>
+    </div>
+</footer>
