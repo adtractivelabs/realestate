@@ -67,11 +67,15 @@ class BHKApartmentAdmin(admin.ModelAdmin):
 # Property Admin View
 class PropertyAdmin(admin.ModelAdmin):
     list_display = ['builder_type','property_name','property_location',
-                    'property_floor','property_type','property_description','property_price',
+                    'property_floor','property_type','property_price',
                     'is_exclusive','created_at','updated_at']
 
     prepopulated_fields = {'property_slug': ('property_name',), }
 
+
+# Properties Images Admin View
+class PropertiesImagesAdmin(admin.ModelAdmin):
+    list_display = ['property_name','created_at', 'updated_at']
 
 # NewsLetters Admin View
 class NewsLettersAdmin(admin.ModelAdmin):
@@ -98,6 +102,7 @@ admin.site.register(Amenities,AmenitiesAdmin)
 
 admin.site.register(BHKApartment,BHKApartmentAdmin)
 admin.site.register(Property,PropertyAdmin)
+admin.site.register(PropertiesImages,PropertiesImagesAdmin)
 admin.site.register(BannerVideo,BannerAdmin)
 
 admin.site.register(NewsLetter,NewsLettersAdmin)

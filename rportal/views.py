@@ -1,9 +1,7 @@
-import json
 from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .forms import *
-
 
 # Create your views here.
 def home(request):
@@ -62,11 +60,21 @@ def enquiry_property(request):
     return render(request, 'pages/home.html', {'enquiry_form': enquiry_form, 'title': 'Enquiry-Form'})
 
 
-def property_list_builder(request):
-    builders = Builder.objects.all()
-    property_list_builder = Property.objects.filter(builder_type__in=list(builders))
-
-    return render(request, 'properties/property_by_builder.html',{'builders': builders, 'property': property_list_builder, 'title': 'Builder Listed Properties'})
+def property_list_builder(request,prperty_tye=None):
+    if request.path  == '/builders/private/':
+        property_type = 'private'
+        builders = Builder.objects.all()
+        property_list_builder = Property.objects.filter(builder_type__in=list(builders),property_type = property_type)
+        return render(request, 'properties/property_by_builder.html',{'builders': builders, 'property': property_list_builder, 'title': 'Builder Listed Properties'})
+    elif request.path  == '/builders/commercial/':
+        property_type = 'commercial'
+        builders = Builder.objects.all()
+        property_list_builder = Property.objects.filter(builder_type__in=list(builders), property_type=property_type)
+        return render(request, 'properties/property_by_builder.html',{'builders': builders, 'property': property_list_builder, 'title': 'Builder Listed Properties'})
+    else:
+        builders = Builder.objects.all()
+        property_list_builder = Property.objects.filter(builder_type__in=list(builders))
+        return render(request, 'properties/property_by_builder.html',{'builders': builders, 'property': property_list_builder, 'title': 'Builder Listed Properties'})
 
 
 def news_letter(request):
@@ -98,9 +106,8 @@ def builder_listed_properties(request, builder_name):
 def property_details(request, builder_name, property_name):
     property_list_builder = Property.objects.filter(property_slug=property_name)
     related_property_list = Builder.objects.filter(builder_slug=builder_name)
-    return render(request, 'properties/property_details.html',
-                  {'title': 'Property Details Listings', 'property_details': property_list_builder,
-                   'property_list': related_property_list})
+    properties_images     = PropertiesImages.objects.filter(property_name__property_slug = property_list_builder[0].property_slug )
+    return render(request, 'properties/property_details.html',{'title': 'Property Details Listings', 'property_details': property_list_builder,'property_list': related_property_list ,'properties_images':properties_images})
 
 
 def enquire_now_lead(request):

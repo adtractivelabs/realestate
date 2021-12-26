@@ -300,13 +300,14 @@ class Property(models.Model):
 
 # Property Images Model structure
 class PropertiesImages(models.Model):
+    # builder_name   = models.ForeignKey(Builder,null=True,blank=True,on_delete=models.CASCADE)
     property_name  = models.ForeignKey(Property,null=True,blank=True,on_delete=models.CASCADE)
-    property_image = models.ImageField(upload_to='properties_collective_images/')
+    property_image = models.ImageField(upload_to='properties_collective_images/',null=True)
     created_at     = models.DateTimeField(auto_now_add=True)
     updated_at     = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.property_name
+        return str(self.property_name.property_name)
 
     class Meta:
         verbose_name_plural = 'Property Images'
