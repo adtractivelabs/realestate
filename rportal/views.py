@@ -63,15 +63,13 @@ def enquiry_property(request):
 
 def property_list_builder(request,property_type=None):
     if property_type == 'private':
-        property_type = 'private'
-        builders = Builder.objects.all()
+        builders           = Builder.objects.all()
         private_properties = Property.objects.filter(builder_type__in=list(builders),property_type = property_type)
-        return render(request, 'properties/property_by_builder.html',{'builders': builders, 'private_property': private_properties, 'title': 'Builder Listed Properties'})
+        return render(request, 'properties/property_types/residential_properties.html',{'private_property': private_properties, 'title': 'Builder Listed Properties'})
     elif property_type== 'commercial':
-        property_type = 'commercial'
         builders = Builder.objects.all()
         commercial_properties = Property.objects.filter(builder_type__in=list(builders), property_type=property_type)
-        return render(request, 'properties/property_by_builder.html',{'builders': builders, 'commercial_property': commercial_properties, 'title': 'Builder Listed Properties'})
+        return render(request, 'properties/property_types/commercial_properties.html',{'commercial_property': commercial_properties, 'title': 'Builder Listed Properties'})
     else:
         builders = Builder.objects.all()
         property_list_builder = Property.objects.filter(builder_type__in=list(builders))
