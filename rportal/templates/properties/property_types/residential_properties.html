@@ -13,18 +13,17 @@
                 <div class="row">
                     {% if private_property %}
                         {% for p in private_property %}
-                            <div class="exclusive-collect">
-                                <div class="exc-collec-main">
-                                    <div class="{% if forloop.counter|divisibleby:2 %}exc-content right-align {% else %} exc-content {% endif %}" data-aos="zoom-out">
-                                        <img src="{% if p.property_image %}{{ p.property_image.url }}{% endif %}">
+                            <div class="col-sm-6 p-4 h-75" data-aos="zoom-out">
+                                <div class="card">
+                                    <img class="card-img-top img-fluid" src="{% if p.property_image %}{{ p.property_image.url }}{% endif %}" alt="{{ p.property_name }}">
+                                    <div class="card-block p-2">
                                         <div class="exc-detail">
                                             <div class="exc-h-name">{{ p.property_name }}<span>{{ p.property_location.location_name }}</span></div>
                                             <div class="exc-price">{{ p.property_price }}<span class="text-capitalize">{{ p.property_type }}</span></div>
-                                            <div class="view-btn"><a href="{% url 'rportal:property_details' p.builder_type.builder_slug p.property_slug  %}">View Details</a></div>
+                                            <div class="view-btn"><a href="{% url 'rportal:property_details' p.builder_type.builder_slug p.property_slug %}">View Details</a></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="godreg-icons mt-5"><img src="{% static 'images/godreg-icon.png' %}"></div>
                             </div>
                         {% endfor %}
                     {% endif %}
@@ -48,9 +47,10 @@
                             {% csrf_token %}
                             <div class="input-subs" data-aos="zoom-out">
                                 <input type="text" name="email" placeholder="Enter Your Email Adress" required>
-                                 <button type="submit" style="width: 233px;margin: 11px;padding: 9px;color: black;background-color: lightgrey;"
+                                <button type="submit"
+                                        style="width: 233px;margin: 11px;padding: 9px;color: black;background-color: lightgrey;"
                                         value="Submit">Subscribe
-                                 </button>
+                                </button>
                             </div>
                         </form>
                     </div>
