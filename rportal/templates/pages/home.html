@@ -12,7 +12,7 @@
     <section>
         {% if about_us %}
             <div class="about-secation" data-aos="fade-up">
-                <div class="about-left">
+                <div class="about-left w-100">
                     <div class="about-us-heading">About Us</div>
                     <div class="about-content">
                         <p>{{ about_us.0.site_description }}</p>
@@ -20,11 +20,6 @@
                     <div class="knowmore-btn">
                         <a href="{% url 'rportal:about_us' %}">More</a>
                         <span class="d-arrw"></span>
-                    </div>
-                </div>
-                <div class="about-right">
-                    <div class="about-image">
-                        <img src="{% static 'images/about-image.jpg' %}" alt="about-image">
                     </div>
                 </div>
             </div>
