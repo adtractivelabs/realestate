@@ -45,12 +45,10 @@
                         {% endif %}
                         <form class="form-contorl row p-2" action="{% url 'rportal:news_letter' %}" method="POST">
                             {% csrf_token %}
-                            <div class="input-subs" data-aos="zoom-out">
-                                <input type="text" name="email" placeholder="Enter Your Email Adress" required>
-                                <button type="submit"
-                                        style="width: 233px;margin: 11px;padding: 9px;color: black;background-color: lightgrey;"
-                                        value="Submit">Subscribe
-                                </button>
+                            <h3>&nbsp;Subscribe to News Letter :</h3>
+                            <div class="input-subs">
+                                <input type="text" name="email" placeholder="Enter Your Email Adress">
+                                <button type="submit" role="button" >Subscribe</button>
                             </div>
                         </form>
                     </div>

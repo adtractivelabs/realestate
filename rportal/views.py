@@ -82,18 +82,18 @@ def news_letter(request):
         if email:
             if NewsLetter.objects.filter(email=email).exists():
                 messages.success(request, 'You Already Subscribed')
-                return redirect('rportal:property_list_builder')
+                return redirect('rportal:property_list_builder',property_type = 'all')
             else:
                 email_news = NewsLetter()
                 email_news.email = email
                 email_news.save()
                 messages.success(request, 'Subscription Successful')
-                return redirect('rportal:property_list_builder')
+                return redirect('rportal:property_list_builder',property_type = 'all')
         else:
             messages.error(request, 'Enter The Valid Mail')
-            return redirect('rportal:property_list_builder')
+            return redirect('rportal:property_list_builder',property_type = 'all')
     else:
-        return redirect('rportal:property_list_builder')
+        return redirect('rportal:property_list_builder',property_type = 'all')
 
 
 def builder_listed_properties(request, builder_name):
@@ -103,7 +103,7 @@ def builder_listed_properties(request, builder_name):
 
 def property_details(request, builder_name, property_name):
     property_list_builder = Property.objects.filter(property_slug=property_name)
-    related_property_list = Builder.objects.filter(builder_slug=builder_name)
+    related_property_list = Property.objects.filter(builder_type__builder_slug=builder_name).exclude(property_name=property_list_builder[0].property_name)
     properties_images     = PropertiesImages.objects.filter(property_name__property_slug = property_list_builder[0].property_slug )
     return render(request, 'properties/property_details.html',{'title': 'Property Details Listings', 'property_details': property_list_builder,'property_list': related_property_list ,'properties_images':properties_images})
 
@@ -139,8 +139,7 @@ def enquire_now_lead(request):
             return render(request, 'properties/lead_generation.html',
                           {'property_list_builder': property_list_builder, 'location_name': location_name})
     else:
-        return render(request, 'properties/lead_generation.html',
-                      {'property_list_builder': property_list_builder, 'location_name': location_name})
+        return render(request, 'properties/lead_generation.html',{'property_list_builder': property_list_builder, 'location_name': location_name})
 
 
 def load_builder(request):

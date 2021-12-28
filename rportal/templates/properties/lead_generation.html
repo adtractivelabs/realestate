@@ -79,7 +79,7 @@
 
                     <div class="form-contorl">
                         <div class="get-notified">
-                            <button type="submit" class="btn-block">Get Notified</button>
+                            <a role="button" type="submit" class="btn-block">Get Notified</a>
                         </div>
                     </div>
                 </form>
@@ -116,7 +116,7 @@
 
             </div>
 
-            <div class="about-left propt" data-aos="zoom-out" >
+            <div class="about-left propt" data-aos="zoom-out">
                 <div class="about-us-heading">Properties</div>
                 <div class="about-content">
                     <p>20000 + Sold sold</p>
@@ -175,11 +175,10 @@
                         {% endif %}
                         <form class="form-contorl row p-2" action="{% url 'rportal:news_letter' %}" method="POST">
                             {% csrf_token %}
+                            <h3>&nbsp;Subscribe to News Letter :</h3>
                             <div class="input-subs">
-                                <input type="text" name="email" placeholder="Enter Your Email Adress" required>
-                                <button type="submit" style="width: 233px;margin: 11px;padding: 9px;color: black;background-color: lightgrey;"
-                                        value="Submit">Subscribe
-                                </button>
+                                <input type="text" name="email" placeholder="Enter Your Email Adress">
+                                <button type="submit" role="button" >Subscribe</button>
                             </div>
                         </form>
                     </div>
@@ -190,7 +189,8 @@
 {% endblock %}
 {% block scripts %}
     <script>
-        $('#location_value').change(function () {            debugger;
+        $('#location_value').change(function () {
+            debugger;
             var location_value_selected = $(this).find("option:selected");
             var option_selected = location_value_selected.text();
             var csrftoken = $('.csrf_token').val()
