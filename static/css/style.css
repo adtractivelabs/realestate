@@ -20,7 +20,7 @@ header {
     /*background: url(../images/header-bg.jpg) no-repeat;
 	 background-size: cover;*/
     height: 100%;
-    border-bottom: #fff solid 3px !important;
+    /*border-bottom: #fff solid 3px !important;*/
     background: rgba(0, 0, 0, 0.7);
     position: fixed;
     top: 0;

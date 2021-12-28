@@ -9,7 +9,7 @@ urlpatterns = [
     path('contact-us/',contact_us,name='contact_us'),
     path('builders/<str:property_type>/',property_list_builder,name='property_list_builder'),
 
-    path('builders/<str:builder_name>/',builder_listed_properties,name='builder_listed_properties'),
+    path('builders-properties/<str:builder_name>/',builder_listed_properties,name='builder_listed_properties'),
     path('builder/<str:builder_name>/<str:property_name>/',property_details,name='property_details'),
 
     path('enquiry-property/',enquiry_property,name='enquiry_property'),
