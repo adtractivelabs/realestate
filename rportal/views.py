@@ -112,32 +112,28 @@ def enquire_now_lead(request):
     property_list_builder = Property.objects.filter(is_exclusive=True)
     location_name = Location.objects.all()
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
+        name     = request.POST.get('name')
+        email    = request.POST.get('email')
+        phone    = request.POST.get('phone')
         location = request.POST.get('location_name')
-        builder = request.POST.get('location_project')
-        property = request.POST.get('location_property')
-        plan_price_invest = request.POST.get('invest_price')
-        plan_to_buy = request.POST.get('plan_to_buy')
+        builder  = request.POST.get('loc_project')
+        property = request.POST.get('loc_property')
 
         if name and email and phone and location and builder and property:
             lead_form = Lead()
-            lead_form.name = name
+            lead_form.name  = name
             lead_form.phone = phone
             lead_form.email = email
-            lead_form.location_name = location
-            lead_form.property_name = property
-            lead_form.project_name = builder
-            lead_form.property_plan_to_by = plan_to_buy
-            lead_form.property_unit_price = plan_price_invest
+            lead_form.location_name = Location.objects.get(id = location)
+            lead_form.property_name = Property.objects.get(id = property)
+            lead_form.project_name  = Builder.objects.get(id  = builder)
+            lead_form.property_unit_price = ''
             lead_form.save()
-            messages.success(request, 'Thanks for Filling the Form')
-            return render(request, 'properties/lead_generation.html',
-                          {'property_list_builder': property_list_builder, 'location_name': location_name})
+            message_code = messages.success(request, 'Thanks for Filling the Form')
+            return render(request, 'properties/lead_generation.html',{'property_list_builder': property_list_builder, 'location_name': location_name,'message_code':message_code})
         else:
-            return render(request, 'properties/lead_generation.html',
-                          {'property_list_builder': property_list_builder, 'location_name': location_name})
+            message_code = messages.success(request, 'Something Went Wrong !')
+            return render(request, 'properties/lead_generation.html',{'property_list_builder': property_list_builder, 'location_name': location_name,'message_code':message_code})
     else:
         return render(request, 'properties/lead_generation.html',{'property_list_builder': property_list_builder, 'location_name': location_name})
 

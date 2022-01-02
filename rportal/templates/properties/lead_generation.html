@@ -66,27 +66,37 @@
                         </select>
                     </div>
                     <div class="form-contorl">
-                        <select class="form-contorl" id="location_project" aria-label="Default select example">
+                        <select class="form-contorl" id="location_project" name="loc_project"
+                                aria-label="Default select example">
                             <option value="">Please select the Project</option>
 
                         </select>
                     </div>
                     <div class="form-contorl">
-                        <select class="form-contorl" id="location_property" aria-label="Default select example">
+                        <select class="form-contorl" id="location_property" name="loc_property"
+                                aria-label="Default select example">
                             <option value="">Please select the Property</option>
                         </select>
                     </div>
 
                     <div class="form-contorl">
                         <div class="get-notified">
-                            <a role="button" type="submit" class="btn-block">Get Notified</a>
+                            <button role="button" type="submit" class="btn-block">Get Notified</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-
+    <section>
+        {% if message_code %}
+            {% for message in message_code %}
+                <div class="alert alert-{{ message.tags }} w-25 text-center">
+                    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </section>
     <section>
         <div class="support-sec" style="margin-top: 4%;">
             <div class="support-main" data-aos="zoom-out">
@@ -178,7 +188,7 @@
                             <h3>&nbsp;Subscribe to News Letter :</h3>
                             <div class="input-subs">
                                 <input type="text" name="email" placeholder="Enter Your Email Adress">
-                                <button type="submit" role="button" >Subscribe</button>
+                                <button type="submit" role="button">Subscribe</button>
                             </div>
                         </form>
                     </div>

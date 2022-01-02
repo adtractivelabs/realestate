@@ -107,4 +107,5 @@ admin.site.register(BannerVideo,BannerAdmin)
 
 admin.site.register(NewsLetter,NewsLettersAdmin)
 admin.site.register(EmailNewsletter,EmailsUpdaterAdmin)
+admin.site.register(Lead)
 

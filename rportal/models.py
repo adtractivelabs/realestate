@@ -342,6 +342,7 @@ class EmailNewsletter(models.Model):
             for s in NewsLetter.objects.all():
                 try:
                     send_mail(self.subject, self.message, EMAIL_HOST_USER, [str(s.email)], fail_silently=True)
+                    super(EmailNewsletter, self).save(*args, **kwargs)
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
         else:
@@ -359,16 +360,18 @@ class Lead(models.Model):
     name                = models.CharField(max_length=260, null=True, blank=True)
     phone               = models.CharField(max_length=260, null=True, blank=True)
     email               = models.EmailField(max_length=260, null=True, blank=True)
-    location_name       = models.CharField(max_length=260, null=True, blank=True)
-    project_name        = models.CharField(max_length=260, null=True, blank=True)
-    property_name       = models.CharField(max_length=260, null=True, blank=True)
-    property_plan_to_by = models.DateTimeField()
+
+    location_name       = models.ForeignKey(Location,max_length=260, null=True, blank=True,on_delete=models.CASCADE)
+    project_name        = models.ForeignKey(Builder,max_length=260, null=True, blank=True,on_delete=models.CASCADE)
+    property_name       = models.ForeignKey(Property,max_length=260, null=True, blank=True,on_delete=models.CASCADE)
+
+    property_plan_to_by = models.DateTimeField(null=True,blank=True)
     property_unit_price = models.CharField(max_length=260, null=True, blank=True)
     created_at          = models.DateTimeField(auto_now_add=True)
     updated_at          = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.location_name
+        return str(self.location_name.location_name)
 
     class Meta:
         verbose_name_plural = 'Lead Genration'
